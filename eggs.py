@@ -9,8 +9,8 @@ class Egg(pygame.sprite.Sprite):
 
 		self.screen = screen
 		self.pos = pos
-		self.frames = load_frames('sprites/insects/Eggsplosion.png', frame_size=32)
 
+		self.frames = load_frames('sprites/insects/Eggsplosion.png', 32, 2)
 		self.current_frame = 0
 		self.frame_duration = 100 # miliseconds
 		self.last_update = pygame.time.get_ticks()
@@ -27,10 +27,7 @@ class Egg(pygame.sprite.Sprite):
 			self.current_frame = (self.current_frame + 1) % len(self.frames)
 			self.image = self.frames[self.current_frame]
 			self.last_update = now
-
-	def blitme(self):
-		self.screen.blit(self.image, self.rect)
-
+			
 	def clickEgg(self, eggs):
 		eggs.remove(self)
 		print("Egg Clicked!")

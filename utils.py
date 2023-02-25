@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 
-def load_frames(sheet_path, frame_size):
+def load_frames(sheet_path, frame_size, scale=1):
 	sheet = pygame.image.load(sheet_path).convert_alpha()
 	sheet_size = sheet.get_size()
 	rows = sheet_size[1] // frame_size
@@ -12,7 +12,10 @@ def load_frames(sheet_path, frame_size):
 	for row in range(rows):
 		for col in range(cols):
 			rect = pygame.Rect(col * frame_size, row * frame_size, frame_size, frame_size)
-			frames.append(sheet.subsurface(rect))
+			frame_surf = sheet.subsurface(rect)
+			if scale != 1:
+				frame_surf = pygame.transform.scale(frame_surf, (frame_size*scale, frame_size*scale))
+			frames.append(frame_surf)
 
 	return frames
 
